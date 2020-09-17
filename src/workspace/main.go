@@ -64,7 +64,8 @@ func encodeResponse(_ context.Context, w http.ResponseWriter, response interface
 }
 func main() {
 
-svc:=service.BookingService{}
+var cars []service.Car
+svc:=service.BookingService{Cars:cars}
 	cabAddHeandler := httptransport.NewServer(
 		AddCabEndpoint(svc),
 		DecodeAddCabRequest,
@@ -79,8 +80,9 @@ svc:=service.BookingService{}
 	
 	http.Handle("/addcab", methodControl("POST", cabAddHeandler))
 	 http.Handle("/bookcab", methodControl("POST", cabBookHandler))
-	
-	manager:=service.Manager{}
+	 log.Fatal(http.ListenAndServe(":8080", nil))
+}
+/*	manager:=service.Manager{}
 	car:=service.Car{
 		CarNumber:1,
 		X:1,
@@ -99,8 +101,7 @@ svc:=service.BookingService{}
 	}
 	manager.AddCab(car)
 	manager.Book(request)
-}
-
+	*/
 // class User{
 // int x;
 // int y;

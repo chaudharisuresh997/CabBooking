@@ -5,8 +5,9 @@ type IBookingService interface {
 	AddCab(Vehicle)
 }
 type BookingService struct{
-
+Cars []Car
 }
+
 func (bookingService BookingService) Book(model.Request) (model.Reply, error) {
 	
 	return model.Reply{},nil
