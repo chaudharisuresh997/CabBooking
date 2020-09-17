@@ -1,32 +1,33 @@
 package service
 
-  const(Red string = "red"
-         Blue string= "blue"
-        Black string= "black"
-        Pink string= "pink"
-    )
+const (
+	Red   string = "red"
+	Blue  string = "blue"
+	Black string = "black"
+	Pink  string = "pink"
+)
+
 type Car struct {
-	  CarNumber int
-	 IsAvailable bool
-	  X int
-	  Y int
-	  FinalX int
-	  FinalY int
-	  Color string
+	CarNumber int
+	isbooked  bool
+	X         int
+	Y         int
+	FinalX    int
+	FinalY    int
+	Color     string
 }
 
 type Vehicle interface {
-	IsBooked()(bool)
+	IsBooked() bool
 	Move()
-
-
-}
-func (car Car) IsBooked() (bool){
-	return car.IsAvailable
 }
 
-func (car Car) Book(flag bool){
-	car.IsAvailable=flag
+func (car Car) IsBooked() bool {
+	return car.isbooked
+}
+
+func (car Car) Book(flag bool) {
+	car.isbooked = flag
 }
 
 func (car Car) Move() {
