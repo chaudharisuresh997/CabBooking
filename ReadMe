@@ -3,6 +3,25 @@ This projects makes assumption\n
 2.no simulation of car moving around and getting free after a while
 3.only get shortest distance car book that cab
 
+
+How to Build
+1.Open terminal
+cd src/workspace
+2.execute this command
+go build . && workspace.exe
+
+Still if you dont have golang in your system
+go to 
+1.cd src/workspace
+it has workspce.exe
+
+2.execute
+workspace.exe
+
+it will launch the server at 8080 port
+
+
+
 REST API
 Add cab to the system
 localhost:8080/addcab
