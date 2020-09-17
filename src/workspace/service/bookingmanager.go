@@ -2,6 +2,7 @@ package service
 
 import (
 	"log"
+	"math"
 	"strings"
 	"workspace/model"
 )
@@ -27,14 +28,7 @@ func (m Manager) BookCabCommand(request model.Request) (*Car, model.Reply) {
 		car, reply = BookByColor(request, Cars)
 		return car, reply
 	} else {
-		log.Printf("Check all cars")
-		for i := 0; i < len(Cars); i++ {
-			log.Printf("searching cars")
-			if !Cars[i].IsBooked() {
-				log.Printf("got free car")
-				return Cars[i], model.Reply{Msg: "", Error: ""}
-			}
-		}
+		return GetNearestCar(request, Cars)
 	}
 	reply.Msg = Booking_Full
 
@@ -54,4 +48,32 @@ func BookByColor(request model.Request, cars []*Car) (car *Car, reply model.Repl
 		}
 	}
 	return &Car{}, model.Reply{Error: Booking_Full}
+}
+func GetNearestCar(request model.Request, allCars []*Car) (*Car, model.Reply) {
+	log.Printf("Check all cars")
+	minDistance := math.MaxFloat64
+	var minCar *Car
+	for i := 0; i < len(allCars); i++ {
+		log.Printf("searching cars")
+		if !allCars[i].IsBooked() {
+			//Calculate distance
+			xTerm := math.Pow(float64(request.X-allCars[i].X), 2)
+			yTerm := math.Pow(float64(request.Y-allCars[i].Y), 2)
+			log.Printf("Smallest distance is now  and the car is %v,%v", minDistance, allCars[i])
+			//minDistance = math.Min(minDistance, math.Sqrt(xTerm+yTerm))
+			if minDistance > math.Sqrt(xTerm+yTerm) {
+				//get minimum car
+				minCar = allCars[i]
+				minDistance = math.Sqrt(xTerm + yTerm)
+			}
+			log.Printf("got free car")
+
+		}
+	}
+	if minCar != nil {
+		log.Printf("Booked Car is ==> %v,%v", minDistance, minCar)
+		minCar.Book(true)
+		return minCar, model.Reply{Msg: "", Error: ""}
+	}
+	return nil, model.Reply{Error: Booking_Full}
 }
