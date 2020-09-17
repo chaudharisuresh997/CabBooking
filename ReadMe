@@ -1,0 +1,67 @@
+This projects makes assumption\n
+1.distance is in x,y only no z axis involved.
+2.no simulation of car moving around and getting free after a while
+3.only get shortest distance car book that cab
+
+REST API
+Add cab to the system
+localhost:8080/addcab
+ {
+	  "CarNumber":3,	 
+	  "X":3,
+	  "Y":3,
+	  "FinalX":7,
+	  "FinalY":7,
+	  "Color":"red"
+}
+another record with great distance
+ {
+	  "CarNumber":7,	 
+	  "X":300,
+	  "Y":300,
+	  "FinalX":700,
+	  "FinalY":700,
+	  "Color":"red"
+}
+{
+	  "CarNumber":5,	 
+	  "X":500,
+	  "Y":500,
+	  "FinalX":700,
+	  "FinalY":700,
+	  "Color":"red"
+}
+
+{
+	  "CarNumber":5,	 
+	  "X":1,
+	  "Y":1,
+	  "FinalX":3,
+	  "FinalY":3,
+	  "Color":"red"
+}
+
+
+This api is used for the booking of the cab
+localhost:8080/bookcab
+ {
+	  
+	  "X":1,
+	  "Y":1,
+	  "FinalX":5,
+	  "FinalY":5,
+	  "Color":""
+}
+
+#Unit test 
+i was more interested to check if distance calculation is working correct so added test
+bookingmanager_test.go
+TestGetNearestCar()
+Car is car pool array with car and their x,Y
+make the request object which stands for user x,y coordinate
+
+
+If you have any queried please contact make
+Chaudharisuresh997@gmail.com
+
+Thanks for the coding challenge :)
