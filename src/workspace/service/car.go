@@ -26,7 +26,7 @@ func (car Car) IsBooked() bool {
 	return car.isbooked
 }
 
-func (car Car) Book(flag bool) {
+func (car *Car) Book(flag bool) {
 	car.isbooked = flag
 }
 

@@ -8,6 +8,7 @@ import (
 )
 
 var Cars []*Car
+var bookedCars []int
 
 type Manager struct {
 }
@@ -55,7 +56,7 @@ func GetNearestCar(request model.Request, allCars []*Car) (*Car, model.Reply) {
 	var minCar *Car
 	for i := 0; i < len(allCars); i++ {
 		log.Printf("searching cars")
-		if !allCars[i].IsBooked() {
+		if allCars[i].IsBooked() != true {
 			//Calculate distance
 			xTerm := math.Pow(float64(request.X-allCars[i].X), 2)
 			yTerm := math.Pow(float64(request.Y-allCars[i].Y), 2)
@@ -72,7 +73,9 @@ func GetNearestCar(request model.Request, allCars []*Car) (*Car, model.Reply) {
 	}
 	if minCar != nil {
 		log.Printf("Booked Car is ==> %v,%v", minDistance, minCar)
+		//		bookedCars = append(bookedCars, minCar.CarNumber)
 		minCar.Book(true)
+		//minCar.Book(true)
 		return minCar, model.Reply{Msg: "", Error: ""}
 	}
 	return nil, model.Reply{Error: Booking_Full}
